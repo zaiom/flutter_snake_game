@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_game/blank_pixel.dart';
@@ -41,10 +42,16 @@ class _HomePageState extends State<HomePage> {
 
         // keep the snake moving!
         moveSnake();
-
-        // snake is eating food
       });
      });
+  }
+
+  void eatFood() {
+    // making sure the new food is not where the snake is
+    while (snakePos.contains(foodPos))
+    {
+      foodPos = Random().nextInt(totalNumberOfSquares);
+    }
   }
 
   void moveSnake() {
@@ -59,8 +66,7 @@ class _HomePageState extends State<HomePage> {
             snakePos.add(snakePos.last + 1);
           }
 
-          // remove tail
-          snakePos.removeAt(0);
+          
         }
 
         break;
@@ -75,8 +81,7 @@ class _HomePageState extends State<HomePage> {
             snakePos.add(snakePos.last - 1);
           }
 
-          // remove tail
-          snakePos.removeAt(0);
+          
         }
         
         break;  
@@ -90,8 +95,7 @@ class _HomePageState extends State<HomePage> {
             snakePos.add(snakePos.last - rowSize);
           }
 
-          // remove tail
-          snakePos.removeAt(0);
+          
         }
         
         break;
@@ -105,13 +109,19 @@ class _HomePageState extends State<HomePage> {
             snakePos.add(snakePos.last + rowSize);
           }
 
-          // remove tail
-          snakePos.removeAt(0);
+         
         }
         
         break;
-
       default:
+    }
+
+    // snake is eating food
+    if (snakePos.last == foodPos) {
+      eatFood();
+    } else {
+      // remvoe tail
+      snakePos.removeAt(0);
     }
   }
 
