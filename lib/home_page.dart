@@ -35,13 +35,26 @@ class _HomePageState extends State<HomePage> {
   int foodPos = 55;
 
   // start the game!
-  // every 200 miliseconds, we are moving the snake
   void startGame() {
+
+    // every 200 miliseconds, we are moving the snake
     Timer.periodic(Duration(milliseconds: 200), (timer) {
       setState(() {
 
         // keep the snake moving!
         moveSnake();
+
+        // check if the game is over
+        if (gameOver())
+        {
+          timer.cancel();
+          // display a message to the user
+          showDialog(context: context, builder: (context) {
+            return AlertDialog(
+              title: Text('Game over'),
+            );
+          });
+        }
       });
      });
   }
@@ -124,6 +137,24 @@ class _HomePageState extends State<HomePage> {
       snakePos.removeAt(0);
     }
   }
+
+  // game over
+  bool gameOver()
+  {
+    // the game is over when the snake runs into itself
+    // this occurs when there is a duplicate position in the snakePoS list
+    
+    // this is the body of the snake (no head)
+    List<int> bodySnake = snakePos.sublist(0, snakePos.length - 1);
+
+    if (bodySnake.contains(snakePos.last)) 
+    {
+      return true;
+    }
+    
+    return false;
+  }
+
 
   @override
   Widget build(BuildContext context) {
