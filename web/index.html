@@ -55,5 +55,30 @@
       });
     });
   </script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
+    import { getFirestore } from "firebase/firestore";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyBeLZmUQBknKOchu7JvpCiqpjO2I_oeR_c",
+      authDomain: "snakegame-1e59d.firebaseapp.com",
+      projectId: "snakegame-1e59d",
+      storageBucket: "snakegame-1e59d.appspot.com",
+      messagingSenderId: "961402704841",
+      appId: "1:961402704841:web:da50065e371d993d948e18",
+      measurementId: "G-EVLKPCXYPE"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </body>
 </html>
